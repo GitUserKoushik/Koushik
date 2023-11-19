@@ -76,7 +76,7 @@ const Product = () => {
     
     {Array.isArray(items)&&items?.map((mm,index)=> (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <Card  sx={{ maxWidth: 345 ,marginLeft:{ xs:'15px',md:'60px'},marginTop:"20px",marginBottom:"15px",backgroundColor:"#9b9fb3",border:"2px solid black"}}>
+            <Card  sx={{ maxWidth: 345 ,marginLeft:{ xs:'15px',md:'60px'},marginTop:"20px",marginBottom:"15px",backgroundColor:"white",boxShadow:"2px 2px 10px 2px"}}>
             
             <CardMedia
             sx={{ height: 200 ,borderBottom:"2px solid black"}}
@@ -92,7 +92,7 @@ const Product = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button variant='outlined' color="success">  <Link  to={`/Update/${mm?._id}`} style={{textDecoration:'none',color:"green"}}>update  </Link></Button>
+              <Button variant='outlined'  >  <Link  to={`/Update/${mm?._id}`} style={{textDecoration:'none',color:"green"}}>update  </Link></Button>
               {/* {`/Update/${mm?._id}`}  */}
               
             

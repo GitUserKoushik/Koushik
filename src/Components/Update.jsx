@@ -102,22 +102,14 @@ const Update = () => {
 //     RedirectUser();
 //   }, [navigate, id]);
   return (
-    <div style={{
-      backgroundImage: `url(https://images.unsplash.com/photo-1696185570507-2d1283399560?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center center',
-      height:'80vh',
-      position:'relative',
-      top:15,
-  }}>
+    <div >
       <Container>
       <Grid container spacing={2}>
         <Grid item xs={6} md={6} sx={{ margin: "0 auto" }}>
           <Paper elevation={24}  square={false}sx={{ padding: 2,   backgroundColor: 'rgba(255, 255, 255, 0.2)', border:'2px solid' ,borderColor:'#3fb572'}}>
       <CardHeader title="create item"    style={{ 
-            color: '#3fb572',
-            borderBottom: '2px solid #3fb572',
+            color: 'white',
+           
             padding: '10px'
           }}/>
             <form>
