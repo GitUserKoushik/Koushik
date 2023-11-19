@@ -72,7 +72,7 @@ const Product = () => {
             
             <CardContent>
               <Card style={{height:"150px",width:"215px"}}>
-                <img src={elements.image} alt="Image" />
+                <img src={elements.image} alt="" />
               </Card>
               <Typography gutterBottom variant="h5" component="div">
                 {elements.title}

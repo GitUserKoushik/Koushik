@@ -40,6 +40,7 @@ export default function Login() {
    
   };
   const se = useSelector((state)=>state.Auth)
+  console.log(se);
   let authtoken = localStorage.getItem("token");
   console.log(authtoken);
   if (authtoken !== null && authtoken !== undefined && authtoken !== "") {
