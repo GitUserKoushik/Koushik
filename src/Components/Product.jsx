@@ -3,14 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import SweetAlertComponent from '../Sweetalert/Sweetalert'
 import {list,productRemove} from '../Redux/ProSlice';
-
+import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-
+import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import {Typography, Pagination} from '@mui/material';
-
+import Typography from '@mui/material/Typography';
+import { image } from '../Redux/Helper';
+import {
+  Box,
+  Grid,
+  Pagination
+} from "@mui/material";
 
 const Product = () => {
   const { items } = useSelector((state) => state?.Pro);
@@ -36,6 +41,11 @@ const Product = () => {
       perpage:9
     }));
    }, [dispatch]);
+   const navigate= useNavigate();
+
+   const fn1=()=>{
+    navigate("/Create")
+      }
 
   const handleChange = (e,pageno) => {
     console.log(pageno,"pageno")
@@ -56,72 +66,61 @@ const Product = () => {
 //   }
   
   return (
-    <div>
-       <Button type="button" variant='contained' style={{marginTop:"20px",marginLeft:"20px"}}>
-      <Link to='/CreateList' style={{textDecoration:"none",color:"white"}}>
-      Create List
-      </Link>
-   
-    </Button>
+    <>
+    <Box sx={{ flexGrow: 1 }}>
     
-    <ul>
-    {Array.isArray(items) && items?.map((elements,index)=>{
-      
-         return (
-          <>
-           
-          <li key={index}>
-            <Card  sx={{ maxWidth: 250 }}>
+    <Button variant="contained" size="large" onClick={fn1} sx={{marginTop:'20px',marginLeft:{xs:'15px',md:'60px'}}}>
+        create
+        </Button>
+    <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    
+    {Array.isArray(items)&&items?.map((mm,index)=> (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <Card  sx={{ maxWidth: 345 ,marginLeft:{ xs:'15px',md:'60px'},marginTop:"20px",marginBottom:"15px",backgroundColor:"#9b9fb3",border:"2px solid black"}}>
             
+            <CardMedia
+            sx={{ height: 200 ,borderBottom:"2px solid black"}}
+            image={image(mm.image)}
+             title="jjuuu"
+      />
             <CardContent>
-              <Card style={{height:"150px",width:"215px"}}>
-                <img src={elements.image} alt="" />
-              </Card>
               <Typography gutterBottom variant="h5" component="div">
-                {elements.title}
+                {mm.title}
               </Typography>
-             
               <Typography variant="body2" color="text.secondary">
-               {elements.description}
+               {mm.description}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" variant='contained' color='success'>
-                update
-                </Button>
-<Button size="small" variant='contained' color='error'>
-              <Link style={{textDecoration:"none",color:"white"}}
-            to=""
-            onClick={() => {
-              setDelete_id(elements?._id);
+              <Button variant='outlined' color="success">  <Link  to={`/Update/${mm?._id}`} style={{textDecoration:'none',color:"green"}}>update  </Link></Button>
+              {/* {`/Update/${mm?._id}`}  */}
+              
+            
+              <Button variant="outlined" color="error"    onClick={() => {
+              setDelete_id(mm?._id);
               setIsDelete(true);
-            }}
-            // className="btn btn-primary mr"
-          >
+            }}>
             Delete
-          </Link>
           </Button>
-
             </CardActions>
           </Card>
-          </li>
-          <br /><br />
-          </>
-          
-        )}
-        )}
-        </ul>
-  
+          </Grid>
+        ))}
+          </Grid>
+        </Box>
+        
+    
     {isDelete && (
         <SweetAlertComponent
           confirm={delete_funcc}
           cancle={() => setIsDelete(false)}
-          title={"Are you sure you want to delete?"}
+          title={"Are you sure?"}
           subtitle={"You will not be able to recover!"}
         />
       )}
 
-{items?.length !== 0 ? (
+
+       {items?.length !== 0 ? (
 
 <Pagination count={totalpage} onChange={handleChange} page={page} variant='outlined' color='secondary' sx={{marginLeft:"200px"}} />
 
@@ -131,8 +130,10 @@ const Product = () => {
 
 </>
 )}
-    </div>
+
+   
   
+</>
   );
 };
 

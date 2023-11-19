@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Product from './Components/Product';
 import CreateList from './Components/CreateList';
+// import Update from './Components/Update';
 // import Login from './Auth/Login';
 // import Register from './Auth/Register';
 // import { store } from './Redux/Store';
@@ -17,6 +18,7 @@ import CreateList from './Components/CreateList';
 const Home = lazy(()=> import("../src/Components/Home"));
 const Login =lazy(()=> import ('../src/Auth/Login'));
 const Register =lazy(()=> import ('../src/Auth/Register'));
+const Update = lazy(()=> import ('./Components/Update'))
 
 function App() {
   function PrivateRoute({ children }) {
@@ -44,7 +46,12 @@ function App() {
       {
         path:"/CreateList",
         Component: <CreateList/>
+      },
+      {
+        path:"/Update/:id",
+        Component: <Update/>
       }
+
       
     ];
   
@@ -62,7 +69,7 @@ function App() {
 
 return (
       <>
-        <Suspense fallback={<h2>Loading.....</h2>}>
+        <Suspense fallback={<h2>Loading....</h2>}>
           <Router>
             <Navbar />
             <Routes>

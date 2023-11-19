@@ -30,6 +30,29 @@ export const productRemove = createAsyncThunk(
     return resData;
   }
 );
+export const productUpdate = createAsyncThunk(
+  "/product/update",
+
+  async (formdata) => {
+    let res = await apiInstance.post(`/product/update`, formdata);
+
+    let resData = res?.data;
+
+    return resData;
+  }
+);
+
+export const productDetails = createAsyncThunk(
+  "product/detail/",
+
+  async (id) => {
+    let res = await apiInstance.get(`product/detail/${id}`);
+
+    let resData = res?.data;
+
+    return resData;
+  }
+);
 
 
 
