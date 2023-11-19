@@ -31,8 +31,8 @@ const Product = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-   dispatch(list());
-  },[]);
+   
+  },[dispatch(list())]);
 
   const handleChange = (e,pageno) => {
     console.log(pageno,"pageno")
