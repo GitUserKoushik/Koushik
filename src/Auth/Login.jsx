@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { styled } from '@mui/material/styles';
+import React from "react";
+
 import Button from '@mui/material/Button';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logauth } from "../Redux/Authslice";
 import { useNavigate } from "react-router-dom";
 
-// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-// import axios from "axios";
+
 import {
     Container,
     Grid,
@@ -15,18 +14,8 @@ import {
     Typography,
   } from "@mui/material";
   import { useForm } from "react-hook-form";
+  import { toast } from "react-toastify";
 
-const VisuallyHiddenInput = styled('input')`
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  white-space: nowrap;
-  width: 1px;
-`;
 
 
 
@@ -50,11 +39,12 @@ export default function Login() {
     dispatch(logauth(formData));
    
   };
+  const se = useSelector((state)=>state.Auth)
   let authtoken = localStorage.getItem("token");
   console.log(authtoken);
   if (authtoken !== null && authtoken !== undefined && authtoken !== "") {
     
-
+toast.success("Login successful")
     navigate("/")
    
  }
@@ -75,13 +65,13 @@ export default function Login() {
              
              
               <TextField
-                {...register("email", {required:true, pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
+                {...register("email", {required:true, })}
                 label="Email"
                 fullWidth
                 margin="normal"
                 variant="outlined"
                 error={!!errors.email}
-                helperText={errors.email && errors.email.type === "required"  && "Email is required"||  errors.email && errors.email.type === "pattern" &&"Valid email is required" }
+                helperText={(errors.email && errors.email.type === "required"  && "Email is required") ||  (errors.email && errors.email.type === "pattern" &&"Valid email is required" )}
                
               />
                 
@@ -92,7 +82,7 @@ export default function Login() {
                 margin="normal"
                 variant="outlined"
                 error={!!errors.password}
-                helperText={errors.password && "Password is required"}
+                helperText={(errors.password) && "Password is required"}
               />
               
 

@@ -45,6 +45,7 @@ export const ProductSlice=createSlice({
           .addCase(list.fulfilled, (state,{payload}) => {
             state.status = 'idlel';
             state.items = payload.data;
+            state.totalpage =payload.totalPages
             console.log("hapning")
           })
           .addCase(list.rejected, (state, action) => {

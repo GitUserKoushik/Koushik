@@ -1,22 +1,23 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import SweetAlertComponent from '../Sweetalert/Sweetalert'
 import {list,productRemove} from '../Redux/ProSlice';
-// import { Navigate, useNavigate } from "react-router-dom";
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
+
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-// import CreateList from '../Components/CreateList'
-// import Button from '@mui/material/Button';
+import {Typography, Pagination} from '@mui/material';
+
 
 const Product = () => {
   const { items } = useSelector((state) => state?.Pro);
   const [delete_id, setDelete_id] = useState("");
   const [isDelete, setIsDelete] = useState(false);
+  const[page,setPage]=useState(1)
+  const {totalpage}=useSelector((state)=>state?.Pro);
   const delete_funcc = (id) => {
     if (delete_id !== "") {
       dispatch(productRemove({ id: delete_id })).then(() => {
@@ -31,7 +32,19 @@ const Product = () => {
   
   useEffect(() => {
    dispatch(list());
-  }, []);
+  },[]);
+
+  const handleChange = (e,pageno) => {
+    console.log(pageno,"pageno")
+    setPage(pageno);
+    dispatch(list(
+        {
+            page: pageno,
+            perpage: 9
+
+        }));
+
+};
   
  
 //   const navigate=useNavigate()
@@ -104,6 +117,17 @@ const Product = () => {
           subtitle={"You will not be able to recover!"}
         />
       )}
+
+{items?.length !== 0 ? (
+
+<Pagination count={totalpage} onChange={handleChange} page={page} variant='outlined' color='secondary' sx={{marginLeft:"200px"}} />
+
+) : (
+
+<>
+
+</>
+)}
     </div>
   
   );

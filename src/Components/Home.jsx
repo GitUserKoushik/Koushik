@@ -1,19 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import supbyk1 from '../Images/supbyk1.jpg'
-import supbyk2 from '../Images/slide_02.jpg';
+
 import supbyk3 from '../Images/supbyk3.jpg'
 import supbyk4 from '../Images/supbyk4.jpg';
 import supbyk6 from '../Images/supbyk6.jpg';
 import supbyk5 from '../Images/supbyk5.jpg';
+import { toast } from "react-toastify";
 
-import { Button, Container, Grid, TextField,Typography, Paper} from "@mui/material";
+import { Button, Typography, Paper} from "@mui/material";
 
 export default function Home() {
 
 let logout = ()=>{
 localStorage.clear();
 window.location.reload();
+toast.success("Logout successful")
+
 }
   return (
     <>

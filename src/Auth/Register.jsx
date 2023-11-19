@@ -1,23 +1,8 @@
 import { useForm } from "react-hook-form";
-// import axios from "axios";
 import { Button, Container, Grid, TextField, Paper} from "@mui/material";
-// import styled from "styled-components";
-import { CloudUpload } from "@mui/icons-material";
 import { regauth } from "../Redux/Authslice";
-
-
 import { useDispatch } from "react-redux";
-// const VisuallyHiddenInput = styled("input")({
-//   clip: "rect(0 0 0 0)",
-//   clipPath: "inset(50%)",
-//   height: 1,
-//   overflow: "hidden",
-//   position: "absolute",
-//   bottom: 0,
-//   left: 0,
-//   whiteSpace: "nowrap",
-//   width: 1,
-// });
+
 
 
 
@@ -31,7 +16,7 @@ export default function Register() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    //   const apiUrl = `https://wtsacademy.dedicateddevelopers.us/api/user/signup`;
+    
     const { first_name, last_name, email, password } = data;
     const formData = new FormData();
     formData.append("first_name", first_name);
@@ -44,7 +29,7 @@ export default function Register() {
 
     dispatch(regauth(formData));
 
-    //   axios.post(apiUrl, formData);
+    
   };
 
   return (

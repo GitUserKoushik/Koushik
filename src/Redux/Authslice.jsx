@@ -2,6 +2,8 @@ import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "./Helper";
 // import Home from "../Components/Home";
 // import { Navigate, redirect } from 'react-router-dom';
+// import { Toast } from "react-toastify/dist/components";
+import { toast } from "react-toastify";
 
 
 
@@ -32,9 +34,26 @@ export const logauth = createAsyncThunk(
 
 export const Authslice = createSlice({
     name: "Authslice",
-    initialState:{},
+    initialState:{
+      redirectTo: null,
+    isLogin: false,
+    },
     reducers: {
+      check_token: (state) => {
+        let token = localStorage.getItem("token");
+        if (token !== null && token !== undefined) {
+          state.isLogin = true;
+        }
       },
+      reset_redirectTo: (state, { payload }) => {
+        state.redirectTo = payload;
+      },
+      logoutAuth: (state) => {
+        localStorage.removeItem("token");
+        state.isLogin = false;
+        toast.error("Logout SuccessFull");
+      },
+    },
   
     extraReducers:(builders) => {
       builders
@@ -71,3 +90,4 @@ export const Authslice = createSlice({
 });
 
 export default Authslice;
+export const { check_token, reset_redirectTo, logoutAuth } = Authslice.actions;
